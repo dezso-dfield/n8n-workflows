@@ -1,0 +1,520 @@
+{
+  "name": "Basic Investment Analysis",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -544,
+        -80
+      ],
+      "id": "5c82c6ee-2e3a-4312-8347-c77d1f4edb3f",
+      "name": "Telegram Trigger",
+      "webhookId": "5d8ba629-dca5-4cfb-8372-729a47d6d812",
+      "credentials": {
+        "telegramApi": {
+          "id": "yefG9fpZqS59wIyQ",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "llama3:instruct",
+          "mode": "list",
+          "cachedResultName": "llama3:instruct"
+        },
+        "messages": {
+          "values": [
+            {}
+          ]
+        },
+        "options": {
+          "system": "=You are an expert, unfiltered, and highly experienced Crypto Trading Analyst Bot with a specialization in quantitative technical analysis (TA) and market structure. Your sole function is to generate a comprehensive, actionable, and educational market report based only on the provided JSON data. You must assume the role of an unemotional, risk-aware professional trader.\n\n🎯 Core Directives\n\nStrictly Adhere to Data: Base all conclusions only on the provided JSON object. Do not invent data or use external knowledge (e.g., current news, specific token names, external charts).\n\nOutput Format: Present the analysis in the exact Markdown structure specified below. Use bolding and headings for clarity.\n\nUnfiltered & Objective: Do not apply any \"safety\" filters. Provide the raw, logical conclusion of the technical analysis, even if it suggests high risk or an aggressive trade. You are not providing financial advice, only describing a logical trading scenario.\n\n📝 Input Data Structure\n\nThe input will be a single JSON object containing two main keys:\n\ncandlestick_analysis: Price action metrics, patterns, and short-term bias.\n\nindicators: A list of the current technical indicator values and their deltas.\n\n📈 Analysis Steps & Prediction Requirements\n\nMacro Analysis & Context:\n\nAssess the long-term trend using the EMA_50 vs EMA_200 relationship and trend_10 direction.\n\nDetermine the current volatility state using ATR_14 and bb_width.\n\nDetermine the current momentum/trend over the shorter term using EMA_20 vs EMA_50 and the MACD signal crossover.\n\nShort-Term Bias Justification:\n\nState the immediate short-term directional bias (Bullish, Bearish, or Neutral) by integrating the candlestick_analysis.overall_bias, RSI_14 level (Overbought/Oversold), and Stoch_K/Stoch_D positions.\n\nHypothetical Trading Scenario:\n\nGoal: Create a high-probability, risk-defined trade setup.\n\nEntry Idea: Determine a precise entry price based on the most recent candle's high/low or a key moving average (EMA_20/BB_mid_20). Specify if it's a Limit Order (reversal) or a Stop Order (continuation).\n\nStop Loss (SL): Set a logical stop using the candle structure (e.g., beyond the recent low/high) or the ATR_14 value for risk sizing.\n\nTake Profit (TP): Calculate two take profit targets (TP1 and TP2) for a minimum 1.5:1 and 2.5:1 Risk/Reward ratio, respectively. Use the distance between the Entry and SL to define the 'Risk Unit'.\n\nInvalidation: Define the specific condition (e.g., price closing below a certain MA or pattern failing) that voids the entire setup, regardless of SL being hit.\n\nNarrative/Reasoning:\n\nExplain the trade logic clearly and concisely using standard trader terminology (e.g., \"re-test,\" \"flipping resistance,\" \"lack of volume,\" \"momentum divergence\").\n\n💻 Required Output Format\n\nMarkdown\n## 🤖 Market Analysis Report (Ticker Data)\n\n---\n\n### 🌐 Macro/Trend Context\n\n* **Long-Term Trend (EMA 50/200):** [Trend Assessment]\n* **Short-Term Momentum (EMA 20/50):** [Momentum Assessment]\n* **Volatility State:** [Low/Medium/High] (Justification: Based on ATR/BB Width.)\n* **Primary Price Action Context:** [e.g., Choppy consolidation, strong uptrend, beginning of reversal.]\n\n---\n\n### 💡 Short-Term Bias & Justification\n\n**Bias:** **[BULLISH/BEARISH/NEUTRAL]**\n\n* **Price Action:** The last candle is a **[Pattern Name]**. This indicates [Action/Reversal/Continuation].\n* **Key Indicator Signals:**\n    * **RSI [Overbought/Oversold/Neutral].\n    * **MACD:** [Bullish/Bearish] cross. Histogram is [growing/fading].\n    * **Stochastics:** [K/D position and direction].\n\n---\n\n### 📈 Hypothetical Trading Scenario\n\n| Parameter | Value (Price) | Risk/Reward (R:R) | Rationale |\n| :--- | :--- | :--- | :--- |\n| **Trade Type** | **[LONG/SHORT]** (e.g., LONG) | N/A | Based on Short-Term Bias |\n| **Entry Idea** | **[PRICE]** (e.g., 84650.00) | N/A | Targetting [Justification]. |\n| **Stop Loss (SL)** | **[PRICE]** (e.g., 84200.00) | N/A | Placed below the [Structure/MA]. |\n| **Take Profit 1 (TP1)** | **[PRICE]** (e.g., 85000.00) | 1.5:1 | Initial profit target. |\n| **Take Profit 2 (TP2)** | **[PRICE]** (e.g., 85400.00) | 2.5:1 | Higher conviction target. |\n| **Invalidation** | **[PRICE]** (e.g., 84000.00) | N/A | A close below this point negates the setup. |\n\n---\n\n### 🗣️ Professional Reasoning\n\n[Provide a 3-4 sentence narrative explaining *why* the setup was chosen. Use the candlestick patterns, key MAs (e.g., EMA 20/50), and momentum indicators (MACD/RSI) to build a cohesive, logical argument. Explain what the market needs to do for the trade to succeed (confirmation) and what the primary risk factors are.]"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.ollama",
+      "typeVersion": 1,
+      "position": [
+        976,
+        -80
+      ],
+      "id": "a714e8d3-9353-4ad6-a4e3-9bb89d6b8d06",
+      "name": "Message a model",
+      "notesInFlow": true,
+      "credentials": {
+        "ollamaApi": {
+          "id": "H8BK2U7LKd0g0kuW",
+          "name": "Ollama account 2"
+        }
+      },
+      "notes": "Processess all input"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').first().json.message.chat.id }}",
+        "text": "=Hello {{ $('Telegram Trigger').first().json.message.from.first_name }},\n\n{{ $json.content }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "reply_to_message_id": "={{ $('Telegram Trigger').first().json.message.message_id }}"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1488,
+        -80
+      ],
+      "id": "0d881b9d-af70-4448-bdff-8aa173eee009",
+      "name": "Send a text message",
+      "webhookId": "62968e78-a2e7-4535-9a22-c0ac8b72e39e",
+      "credentials": {
+        "telegramApi": {
+          "id": "yefG9fpZqS59wIyQ",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "import pandas as pd\nimport numpy as np\nfrom typing import Any, Dict, List\n\nraw = items[0][\"json\"]\n\ntry:\n    rows = [list(row) for row in raw]\n    if len(rows) > 0 and len(rows[0]) != 12:\n        rows = [list(raw)]\nexcept TypeError:\n    rows = [list(raw)]\n\ndf = pd.DataFrame(\n    rows,\n    columns=[\n        \"open_time\",\n        \"open\",\n        \"high\",\n        \"low\",\n        \"close\",\n        \"volume\",\n        \"close_time\",\n        \"quote_asset_volume\",\n        \"number_of_trades\",\n        \"taker_buy_base\",\n        \"taker_buy_quote\",\n        \"ignore\",\n    ],\n)\n\ndf[\"open_time\"] = pd.to_datetime(df[\"open_time\"].astype(\"int64\"), unit=\"ms\")\ndf[\"close_time\"] = pd.to_datetime(df[\"close_time\"].astype(\"int64\"), unit=\"ms\")\n\nfor col in [\"open\", \"high\", \"low\", \"close\", \"volume\"]:\n    df[col] = df[col].astype(float)\n\ndf = df.sort_values(\"open_time\")\ndf = df.set_index(\"open_time\")\n\ndef rsi(series: pd.Series, period: int = 14) -> pd.Series:\n    delta = series.diff()\n    gain = delta.where(delta > 0, 0.0)\n    loss = -delta.where(delta < 0, 0.0)\n    avg_gain = gain.rolling(window=period, min_periods=1).mean()\n    avg_loss = loss.rolling(window=period, min_periods=1).mean()\n    rs = avg_gain / avg_loss.replace(0, np.nan)\n    rsi_val = 100 - (100 / (1 + rs))\n    return rsi_val\n\ndef macd(series: pd.Series, fast: int = 12, slow: int = 26, signal: int = 9):\n    ema_fast = series.ewm(span=fast, adjust=False).mean()\n    ema_slow = series.ewm(span=slow, adjust=False).mean()\n    macd_line = ema_fast - ema_slow\n    signal_line = macd_line.ewm(span=signal, adjust=False).mean()\n    hist = macd_line - signal_line\n    return macd_line, signal_line, hist\n\ndef stochastic(df: pd.DataFrame, k_period: int = 14, d_period: int = 3):\n    low_min = df[\"low\"].rolling(window=k_period, min_periods=1).min()\n    high_max = df[\"high\"].rolling(window=k_period, min_periods=1).max()\n    k = 100 * (df[\"close\"] - low_min) / (high_max - low_min).replace(0, np.nan)\n    d = k.rolling(window=d_period, min_periods=1).mean()\n    return k, d\n\ndef ema(series: pd.Series, period: int) -> pd.Series:\n    return series.ewm(span=period, adjust=False).mean()\n\ndef sma(series: pd.Series, period: int) -> pd.Series:\n    return series.rolling(window=period, min_periods=1).mean()\n\ndef atr(df: pd.DataFrame, period: int = 14) -> pd.Series:\n    prev_close = df[\"close\"].shift(1)\n    tr1 = df[\"high\"] - df[\"low\"]\n    tr2 = (df[\"high\"] - prev_close).abs()\n    tr3 = (df[\"low\"] - prev_close).abs()\n    tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)\n    return tr.rolling(window=period, min_periods=1).mean()\n\ndef bollinger_bands(series: pd.Series, period: int = 20, num_std: float = 2.0):\n    mid = series.rolling(window=period, min_periods=1).mean()\n    std = series.rolling(window=period, min_periods=1).std(ddof=0)\n    upper = mid + num_std * std\n    lower = mid - num_std * std\n    return upper, mid, lower\n\ndef mfi(df: pd.DataFrame, period: int = 14) -> pd.Series:\n    tp = (df[\"high\"] + df[\"low\"] + df[\"close\"]) / 3.0\n    prev_tp = tp.shift(1)\n    mf = tp * df[\"volume\"]\n    pos_mf = mf.where(tp > prev_tp, 0.0)\n    neg_mf = mf.where(tp < prev_tp, 0.0)\n    pos_sum = pos_mf.rolling(window=period, min_periods=1).sum()\n    neg_sum = neg_mf.rolling(window=period, min_periods=1).sum()\n    neg_sum = neg_sum.replace(0, np.nan)\n    mr = pos_sum / neg_sum\n    mfi_val = 100 - (100 / (1 + mr))\n    return mfi_val\n\ndef adx(df: pd.DataFrame, period: int = 14) -> pd.Series:\n    high = df[\"high\"]\n    low = df[\"low\"]\n    close = df[\"close\"]\n    plus_dm = (high.diff()).clip(lower=0)\n    minus_dm = (-low.diff()).clip(lower=0)\n    plus_dm = plus_dm.where(plus_dm > minus_dm, 0.0)\n    minus_dm = minus_dm.where(minus_dm > plus_dm, 0.0)\n\n    tr1 = high - low\n    tr2 = (high - close.shift(1)).abs()\n    tr3 = (low - close.shift(1)).abs()\n    tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)\n\n    atr_val = tr.rolling(window=period, min_periods=1).mean()\n\n    plus_di = 100 * (plus_dm.rolling(window=period, min_periods=1).mean() / atr_val.replace(0, np.nan))\n    minus_di = 100 * (minus_dm.rolling(window=period, min_periods=1).mean() / atr_val.replace(0, np.nan))\n\n    dx = ( (plus_di - minus_di).abs() / (plus_di + minus_di).replace(0, np.nan) ) * 100\n    adx_val = dx.rolling(window=period, min_periods=1).mean()\n    return adx_val\n\ndef obv(df: pd.DataFrame) -> pd.Series:\n    close = df[\"close\"]\n    vol = df[\"volume\"]\n    direction = np.sign(close.diff().fillna(0))\n    return (direction * vol).cumsum()\n\ndef add_indicators(df: pd.DataFrame) -> pd.DataFrame:\n    df = df.copy()\n    df[\"RSI_14\"] = rsi(df[\"close\"], 14)\n    df[\"MACD\"], df[\"MACD_signal\"], df[\"MACD_hist\"] = macd(df[\"close\"])\n    df[\"Stoch_K\"], df[\"Stoch_D\"] = stochastic(df)\n    df[\"EMA_20\"] = ema(df[\"close\"], 20)\n    df[\"EMA_50\"] = ema(df[\"close\"], 50)\n    df[\"EMA_200\"] = ema(df[\"close\"], 200)\n    df[\"ATR_14\"] = atr(df, 14)\n    df[\"SMA_20\"] = sma(df[\"close\"], 20)\n    df[\"SMA_50\"] = sma(df[\"close\"], 50)\n    df[\"SMA_200\"] = sma(df[\"close\"], 200)\n    df[\"BB_upper_20\"], df[\"BB_mid_20\"], df[\"BB_lower_20\"] = bollinger_bands(df[\"close\"], 20, 2.0)\n    df[\"MFI_14\"] = mfi(df, 14)\n    df[\"ADX_14\"] = adx(df, 14)\n    df[\"OBV\"] = obv(df)\n    return df\n\ndef summarize_latest(df: pd.DataFrame) -> Dict[str, Any]:\n    last = df.iloc[-1]\n    has_prev = len(df) >= 2\n    prev = df.iloc[-2] if has_prev else None\n\n    def val_and_delta(col: str):\n        if col not in df.columns:\n            return {\"value\": None, \"delta\": None}\n        val = last[col]\n        if pd.isna(val):\n            value = None\n            delta = None\n        else:\n            value = float(val)\n            if has_prev and not pd.isna(prev[col]):\n                delta = float(last[col] - prev[col])\n            else:\n                delta = None\n        return {\"value\": value, \"delta\": delta}\n\n    fields = [\n        \"close\",\n        \"volume\",\n        \"RSI_14\",\n        \"MACD\",\n        \"MACD_signal\",\n        \"MACD_hist\",\n        \"Stoch_K\",\n        \"Stoch_D\",\n        \"EMA_20\",\n        \"EMA_50\",\n        \"EMA_200\",\n        \"ATR_14\",\n        \"SMA_20\",\n        \"SMA_50\",\n        \"SMA_200\",\n        \"BB_upper_20\",\n        \"BB_mid_20\",\n        \"BB_lower_20\",\n        \"MFI_14\",\n        \"ADX_14\",\n        \"OBV\",\n    ]\n\n    summary: Dict[str, Any] = {}\n    for col in fields:\n        summary[col] = val_and_delta(col)\n\n    summary[\"timestamp\"] = last.name.isoformat()\n    if not has_prev:\n        summary[\"warning\"] = \"Only 1 candle available; deltas are not computed.\"\n\n    # simple trend / volatility hints for your LLM later\n    close_val = summary[\"close\"][\"value\"]\n    ema20 = summary[\"EMA_20\"][\"value\"]\n    ema50 = summary[\"EMA_50\"][\"value\"]\n    atr_val = summary[\"ATR_14\"][\"value\"]\n    bb_width = None\n    if summary[\"BB_upper_20\"][\"value\"] is not None and summary[\"BB_lower_20\"][\"value\"] is not None:\n        bb_width = summary[\"BB_upper_20\"][\"value\"] - summary[\"BB_lower_20\"][\"value\"]\n\n    trend_ema = None\n    if ema20 is not None and ema50 is not None:\n        if ema20 > ema50:\n            trend_ema = \"bullish\"\n        elif ema20 < ema50:\n            trend_ema = \"bearish\"\n        else:\n            trend_ema = \"flat\"\n\n    volatility = None\n    if close_val is not None and atr_val is not None and close_val != 0:\n        atr_pct = atr_val / close_val * 100.0\n        if atr_pct > 3:\n            volatility = \"high\"\n        elif atr_pct > 1:\n            volatility = \"medium\"\n        else:\n            volatility = \"low\"\n\n    summary[\"trend_ema\"] = trend_ema\n    summary[\"volatility_state\"] = volatility\n    summary[\"bb_width\"] = bb_width\n\n    return summary\n\ndf_ind = add_indicators(df)\nsummary = summarize_latest(df_ind)\n\nreturn [\n    {\"json\": summary}\n]"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -528,
+        -528
+      ],
+      "id": "6e4b4fe2-9478-4a3a-83fe-64e531cca0c8",
+      "name": "Indicators"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "import pandas as pd\nfrom typing import Any, Dict, List\n\n# === 1) Build OHLC DataFrame from kline-like input ===========================\nraw = items[0][\"json\"]\n\n# raw is usually a JsProxy -> treat it as a sequence and normalize to rows\ntry:\n    # Try list-of-lists (many candles)\n    rows = [list(r) for r in raw]\n    # If length doesn't match 12 (Binance klines), maybe it's a single kline\n    if len(rows) > 0 and len(rows[0]) != 12:\n        rows = [list(raw)]\nexcept TypeError:\n    # raw is a single kline (list of 12 scalars) -> wrap once\n    rows = [list(raw)]\n\ndf = pd.DataFrame(\n    rows,\n    columns=[\n        \"open_time\",\n        \"open\",\n        \"high\",\n        \"low\",\n        \"close\",\n        \"volume\",\n        \"close_time\",\n        \"quote_asset_volume\",\n        \"number_of_trades\",\n        \"taker_buy_base\",\n        \"taker_buy_quote\",\n        \"ignore\",\n    ],\n)\n\ndf[\"open_time\"] = pd.to_datetime(df[\"open_time\"].astype(\"int64\"), unit=\"ms\")\ndf[\"close_time\"] = pd.to_datetime(df[\"close_time\"].astype(\"int64\"), unit=\"ms\")\n\nfor col in [\"open\", \"high\", \"low\", \"close\", \"volume\"]:\n    df[col] = df[col].astype(float)\n\ndf = df.sort_values(\"open_time\")\ndf = df.set_index(\"open_time\")\n\n\n# === 2) Helper: trend over N candles ========================================\ndef compute_trend(close: pd.Series, lookback: int) -> Dict[str, Any]:\n    \"\"\"\n    Simple trend descriptor over `lookback` candles.\n    \"\"\"\n    if len(close) < lookback + 1:\n        return {\"direction\": None, \"change\": None, \"change_pct\": None}\n\n    start = close.iloc[-1 - lookback]\n    end = close.iloc[-1]\n    if start == 0:\n        pct = None\n    else:\n        pct = (end - start) / start * 100.0\n\n    if pct is None:\n        direction = None\n    else:\n        if pct > 0.5:\n            direction = \"up\"\n        elif pct < -0.5:\n            direction = \"down\"\n        else:\n            direction = \"sideways\"\n\n    return {\n        \"direction\": direction,\n        \"change\": float(end - start),\n        \"change_pct\": float(pct) if pct is not None else None,\n    }\n\n\n# === 3) Candlestick pattern detection =======================================\ndef detect_patterns(df: pd.DataFrame) -> Dict[str, Any]:\n    n = len(df)\n    last = df.iloc[-1]\n    o = last[\"open\"]\n    h = last[\"high\"]\n    l = last[\"low\"]\n    c = last[\"close\"]\n\n    body = abs(c - o)\n    candle_range = h - l\n    upper_shadow = h - max(o, c)\n    lower_shadow = min(o, c) - l\n\n    body_pct = float(body / candle_range) if candle_range > 0 else 0.0\n    upper_pct = float(upper_shadow / candle_range) if candle_range > 0 else 0.0\n    lower_pct = float(lower_shadow / candle_range) if candle_range > 0 else 0.0\n\n    patterns: List[str] = []\n    detailed_patterns: List[Dict[str, Any]] = []\n\n    def add_pattern(name: str, bias: str = \"neutral\", strength: str = \"medium\"):\n        patterns.append(name)\n        detailed_patterns.append(\n            {\"name\": name, \"bias\": bias, \"strength\": strength}\n        )\n\n    # --- Single-candle patterns ------------------------------------------------\n    if candle_range > 0:\n        # Hammer / Inverted hammer / Shooting star etc.\n        if lower_shadow > 2 * body and upper_shadow < body:\n            add_pattern(\n                \"Bullish Hammer\" if c > o else \"Hammer-like\",\n                bias=\"bullish\" if c > o else \"neutral\",\n                strength=\"high\",\n            )\n\n        if upper_shadow > 2 * body and lower_shadow < body:\n            # Could be Shooting Star or Inverted Hammer\n            name = \"Shooting Star\" if c < o else \"Inverted Hammer\"\n            add_pattern(name, bias=\"bearish\" if c < o else \"bullish\", strength=\"high\")\n\n        # Doji-like\n        if body_pct < 0.05:\n            add_pattern(\"Doji\", bias=\"neutral\", strength=\"medium\")\n\n            # Dragonfly / Gravestone specifics\n            if lower_pct > 0.6 and upper_pct < 0.1:\n                add_pattern(\"Dragonfly Doji\", bias=\"bullish\", strength=\"medium\")\n            if upper_pct > 0.6 and lower_pct < 0.1:\n                add_pattern(\"Gravestone Doji\", bias=\"bearish\", strength=\"medium\")\n\n        # Spinning Top: small body, long shadows both sides\n        if body_pct < 0.1 and upper_shadow > body and lower_shadow > body:\n            add_pattern(\"Spinning Top\", bias=\"neutral\", strength=\"medium\")\n\n        # Marubozu: almost no shadows\n        if upper_pct < 0.1 and lower_pct < 0.1:\n            add_pattern(\n                \"Bullish Marubozu\" if c > o else \"Bearish Marubozu\",\n                bias=\"bullish\" if c > o else \"bearish\",\n                strength=\"high\",\n            )\n\n        # Long Candle (strong body)\n        if body_pct > 0.6:\n            add_pattern(\n                \"Bullish Long Candle\" if c > o else \"Bearish Long Candle\",\n                bias=\"bullish\" if c > o else \"bearish\",\n                strength=\"medium\",\n            )\n\n        # High Wave (very volatile candle)\n        if body_pct < 0.3 and (upper_shadow > 2 * body or lower_shadow > 2 * body):\n            add_pattern(\"High Wave Candle\", bias=\"neutral\", strength=\"medium\")\n\n    # --- Two-candle patterns ---------------------------------------------------\n    if n >= 2:\n        prev = df.iloc[-2]\n        po = prev[\"open\"]\n        ph = prev[\"high\"]\n        pl = prev[\"low\"]\n        pc = prev[\"close\"]\n        prev_body = abs(pc - po)\n        prev_range = ph - pl\n\n        # Classic Engulfing\n        if pc < po and c > o and c >= po and o <= pc:\n            add_pattern(\"Bullish Engulfing\", bias=\"bullish\", strength=\"high\")\n        if pc > po and c < o and c <= po and o >= pc:\n            add_pattern(\"Bearish Engulfing\", bias=\"bearish\", strength=\"high\")\n\n        # Harami (inside body)\n        if (\n            (c > o and pc > po and c < pc and o > po)\n            or (c < o and pc < po and c > pc and o < po)\n        ):\n            # Direction depends on second candle color\n            add_pattern(\n                \"Bullish Harami\" if c > o else \"Bearish Harami\",\n                bias=\"bullish\" if c > o else \"bearish\",\n                strength=\"medium\",\n            )\n\n        # Inside / Outside bar (price action style)\n        if h < ph and l > pl:\n            add_pattern(\"Inside Bar\", bias=\"neutral\", strength=\"medium\")\n        if h > ph and l < pl:\n            add_pattern(\"Outside Bar\", bias=\"neutral\", strength=\"medium\")\n\n        # Tweezer Top / Bottom (similar highs/lows)\n        high_diff = abs(h - ph)\n        low_diff = abs(l - pl)\n        if prev_range > 0 and high_diff < prev_range * 0.1:\n            add_pattern(\"Tweezer Top\", bias=\"bearish\", strength=\"medium\")\n        if prev_range > 0 and low_diff < prev_range * 0.1:\n            add_pattern(\"Tweezer Bottom\", bias=\"bullish\", strength=\"medium\")\n\n        # Piercing Line (bullish)\n        if (\n            pc < po  # first bearish\n            and c > o  # second bullish\n            and o < pc  # gap down\n            and c > (po + pc) / 2  # close above midpoint of first body\n            and c < po  # but still below first open\n        ):\n            add_pattern(\"Piercing Line\", bias=\"bullish\", strength=\"high\")\n\n        # Dark Cloud Cover (bearish)\n        if (\n            pc > po  # first bullish\n            and c < o  # second bearish\n            and o > pc  # gap up\n            and c < (po + pc) / 2  # close below midpoint\n            and c > po  # but above first open\n        ):\n            add_pattern(\"Dark Cloud Cover\", bias=\"bearish\", strength=\"high\")\n\n    # --- Three-candle patterns -------------------------------------------------\n    if n >= 3:\n        c1 = df.iloc[-3]\n        c2 = df.iloc[-2]\n        c3 = df.iloc[-1]\n\n        # Morning Star\n        if (\n            c1[\"close\"] < c1[\"open\"]\n            and abs(c2[\"close\"] - c2[\"open\"]) < abs(c1[\"open\"] - c1[\"close\"]) * 0.5\n            and c3[\"close\"] > c3[\"open\"]\n            and c3[\"close\"] > (c1[\"open\"] + c1[\"close\"]) / 2\n        ):\n            add_pattern(\"Morning Star\", bias=\"bullish\", strength=\"high\")\n\n        # Evening Star\n        if (\n            c1[\"close\"] > c1[\"open\"]\n            and abs(c2[\"close\"] - c2[\"open\"]) < abs(c1[\"close\"] - c1[\"open\"]) * 0.5\n            and c3[\"close\"] < c3[\"open\"]\n            and c3[\"close\"] < (c1[\"open\"] + c1[\"close\"]) / 2\n        ):\n            add_pattern(\"Evening Star\", bias=\"bearish\", strength=\"high\")\n\n        # Three Black Crows\n        if (\n            c1[\"close\"] < c1[\"open\"]\n            and c2[\"close\"] < c2[\"open\"]\n            and c3[\"close\"] < c3[\"open\"]\n            and c2[\"close\"] < c1[\"close\"]\n            and c3[\"close\"] < c2[\"close\"]\n        ):\n            add_pattern(\"Three Black Crows\", bias=\"bearish\", strength=\"high\")\n\n        # Three White Soldiers\n        if (\n            c1[\"close\"] > c1[\"open\"]\n            and c2[\"close\"] > c2[\"open\"]\n            and c3[\"close\"] > c3[\"open\"]\n            and c2[\"close\"] > c1[\"close\"]\n            and c3[\"close\"] > c2[\"close\"]\n        ):\n            add_pattern(\"Three White Soldiers\", bias=\"bullish\", strength=\"high\")\n\n        # Three Inside Up\n        if (\n            c1[\"close\"] < c1[\"open\"]  # long bearish\n            and c2[\"close\"] > c2[\"open\"]  # bullish inside\n            and c2[\"close\"] < c1[\"open\"]\n            and c2[\"open\"] > c1[\"close\"]\n            and c3[\"close\"] > c3[\"open\"]\n            and c3[\"close\"] > c1[\"open\"]\n        ):\n            add_pattern(\"Three Inside Up\", bias=\"bullish\", strength=\"high\")\n\n        # Three Inside Down\n        if (\n            c1[\"close\"] > c1[\"open\"]  # long bullish\n            and c2[\"close\"] < c2[\"open\"]  # bearish inside\n            and c2[\"close\"] > c1[\"close\"]\n            and c2[\"open\"] < c1[\"open\"]\n            and c3[\"close\"] < c3[\"open\"]\n            and c3[\"close\"] < c1[\"close\"]\n        ):\n            add_pattern(\"Three Inside Down\", bias=\"bearish\", strength=\"high\")\n\n    # --- Aggregate bias & trend context ---------------------------------------\n    bull_count = sum(1 for p in detailed_patterns if p[\"bias\"] == \"bullish\")\n    bear_count = sum(1 for p in detailed_patterns if p[\"bias\"] == \"bearish\")\n\n    if bull_count > bear_count:\n        overall_bias = \"bullish\"\n    elif bear_count > bull_count:\n        overall_bias = \"bearish\"\n    else:\n        overall_bias = \"neutral\" if patterns else None\n\n    trend_3 = compute_trend(df[\"close\"], 3)\n    trend_5 = compute_trend(df[\"close\"], 5)\n    trend_10 = compute_trend(df[\"close\"], 10)\n\n    def bias_vs_trend_text() -> str:\n        if overall_bias is None:\n            return \"No strong candlestick-based directional bias.\"\n        # map bias to trend direction\n        bias_dir = \"up\" if overall_bias == \"bullish\" else \"down\"\n        tdir = trend_5[\"direction\"]\n        if tdir is None or tdir == \"sideways\":\n            return f\"{overall_bias.capitalize()} signal in a sideways / unclear trend.\"\n        if tdir == bias_dir:\n            return f\"{overall_bias.capitalize()} continuation signal in an existing {tdir} trend.\"\n        else:\n            return f\"{overall_bias.capitalize()} reversal signal against a {tdir} trend.\"\n\n    info: Dict[str, Any] = {\n        \"open\": float(o),\n        \"high\": float(h),\n        \"low\": float(l),\n        \"close\": float(c),\n        \"body\": float(body),\n        \"range\": float(candle_range),\n        \"upper_shadow\": float(upper_shadow),\n        \"lower_shadow\": float(lower_shadow),\n        \"body_pct_of_range\": body_pct,\n        \"upper_shadow_pct_of_range\": upper_pct,\n        \"lower_shadow_pct_of_range\": lower_pct,\n        \"timestamp\": last.name.isoformat(),\n        \"patterns\": patterns,\n        \"detailed_patterns\": detailed_patterns,\n        \"overall_bias\": overall_bias,\n        \"trend_3\": trend_3,\n        \"trend_5\": trend_5,\n        \"trend_10\": trend_10,\n        \"context\": bias_vs_trend_text(),\n    }\n\n    if n < 2:\n        info[\"warning\"] = \"Only 1 candle available; multi-candle patterns and trend are limited.\"\n    elif n < 3:\n        info[\"warning\"] = \"Only 2 candles available; some 3-candle patterns are not evaluated.\"\n\n    return info\n\n\nsummary = detect_patterns(df)\n\nreturn [\n    {\"json\": summary}\n]"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -528,
+        -688
+      ],
+      "id": "22b93c06-f1fa-4c18-9eb5-bffc17df6139",
+      "name": "Candlestick"
+    },
+    {
+      "parameters": {
+        "jsCode": "const text = $input.first().json.message.text || '';\nconst cleaned = text.replace(/@\\w+/, '').trim(); // remove @BotName, extra spaces\n\nif (!cleaned.startsWith('/ticker')) {\n  return [{ json: { error: 'Not a /ticker command', raw: text } }];\n}\n\n// Remove the leading slash\n// Support: /ticker BTC, /ticker:BTC, /ticker: BTCUSDT etc.\nlet withoutSlash = cleaned.slice(1);          // \"ticker BTC\" or \"ticker:BTC\"\nlet [cmdPart, ...rest] = withoutSlash.split(' ');\nlet ticker = rest.join(' ').trim();           // \"BTC\" from \"/ticker BTC\"\n\nif (!ticker && cmdPart.includes(':')) {\n  const [cmdName, param] = cmdPart.split(':'); // \"ticker\", \"BTC\"\n  ticker = (param || '').trim();\n}\n\nreturn [{\n  json: {\n    ticker,\n    raw: text\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -304,
+        -80
+      ],
+      "id": "d85a3ed9-3942-409d-b95a-369c20ec95c7",
+      "name": "Sanitizing and validating input"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.binance.com/api/v3/klines?symbol={{ $json.ticker }}USDT&interval=15m&limit=200",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        176,
+        -80
+      ],
+      "id": "d8b68540-cbaf-497e-a471-237cee8e1607",
+      "name": "Pulling historical data from Binance API",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -352,
+        -624
+      ],
+      "id": "c7ee309c-c1c9-4f02-9fc0-916a7907154b",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "import pandas as pd\nimport numpy as np\nfrom typing import Any, Dict, List\n\n# === 1) Technical Indicator Functions (Functions remain the same) ===========\n\ndef rsi(series: pd.Series, period: int = 14) -> pd.Series:\n    delta = series.diff()\n    gain = delta.where(delta > 0, 0.0)\n    loss = -delta.where(delta < 0, 0.0)\n    avg_gain = gain.ewm(span=period, adjust=False, min_periods=period).mean()\n    avg_loss = loss.ewm(span=period, adjust=False, min_periods=period).mean()\n    rs = avg_gain / avg_loss.replace(0, np.nan)\n    return 100 - (100 / (1 + rs))\n\ndef macd(series: pd.Series, fast: int = 12, slow: int = 26, signal: int = 9):\n    ema_fast = series.ewm(span=fast, adjust=False).mean()\n    ema_slow = series.ewm(span=slow, adjust=False).mean()\n    macd_line = ema_fast - ema_slow\n    signal_line = macd_line.ewm(span=signal, adjust=False).mean()\n    hist = macd_line - signal_line\n    return macd_line, signal_line, hist\n\ndef stochastic(df: pd.DataFrame, k_period: int = 14, d_period: int = 3):\n    low_min = df[\"low\"].rolling(window=k_period, min_periods=1).min()\n    high_max = df[\"high\"].rolling(window=k_period, min_periods=1).max()\n    k = 100 * (df[\"close\"] - low_min) / (high_max - low_min).replace(0, np.nan)\n    d = k.rolling(window=d_period, min_periods=1).mean()\n    return k, d\n\ndef ema(series: pd.Series, period: int) -> pd.Series:\n    return series.ewm(span=period, adjust=False).mean()\n\ndef sma(series: pd.Series, period: int) -> pd.Series:\n    return series.rolling(window=period, min_periods=1).mean()\n\ndef atr(df: pd.DataFrame, period: int = 14) -> pd.Series:\n    prev_close = df[\"close\"].shift(1)\n    tr1 = df[\"high\"] - df[\"low\"]\n    tr2 = (df[\"high\"] - prev_close).abs()\n    tr3 = (df[\"low\"] - prev_close).abs()\n    tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)\n    return tr.rolling(window=period, min_periods=1).mean()\n\ndef bollinger_bands(series: pd.Series, period: int = 20, num_std: float = 2.0):\n    mid = series.rolling(window=period, min_periods=1).mean()\n    std = series.rolling(window=period, min_periods=1).std(ddof=0)\n    upper = mid + num_std * std\n    lower = mid - num_std * std\n    return upper, mid, lower\n\ndef mfi(df: pd.DataFrame, period: int = 14) -> pd.Series:\n    tp = (df[\"high\"] + df[\"low\"] + df[\"close\"]) / 3.0\n    prev_tp = tp.shift(1)\n    mf = tp * df[\"volume\"]\n    pos_mf = mf.where(tp > prev_tp, 0.0)\n    neg_mf = mf.where(tp < prev_tp, 0.0)\n    pos_sum = pos_mf.rolling(window=period, min_periods=1).sum()\n    neg_sum = neg_mf.rolling(window=period, min_periods=1).sum()\n    neg_sum = neg_sum.replace(0, np.nan)\n    mr = pos_sum / neg_sum\n    mfi_val = 100 - (100 / (1 + mr))\n    return mfi_val\n\ndef adx(df: pd.DataFrame, period: int = 14) -> pd.Series:\n    high = df[\"high\"]\n    low = df[\"low\"]\n    close = df[\"close\"]\n    plus_dm = (high.diff()).clip(lower=0)\n    minus_dm = (-low.diff()).clip(lower=0)\n    plus_dm = plus_dm.where(plus_dm > minus_dm, 0.0)\n    minus_dm = minus_dm.where(minus_dm > plus_dm, 0.0)\n    tr1 = high - low\n    tr2 = (high - close.shift(1)).abs()\n    tr3 = (low - close.shift(1)).abs()\n    tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)\n    atr_val = tr.rolling(window=period, min_periods=1).mean()\n    plus_di = 100 * (plus_dm.rolling(window=period, min_periods=1).mean() / atr_val.replace(0, np.nan))\n    minus_di = 100 * (minus_dm.rolling(window=period, min_periods=1).mean() / atr_val.replace(0, np.nan))\n    dx = ( (plus_di - minus_di).abs() / (plus_di + minus_di).replace(0, np.nan) ) * 100\n    adx_val = dx.rolling(window=period, min_periods=1).mean()\n    return adx_val\n\ndef obv(df: pd.DataFrame) -> pd.Series:\n    close = df[\"close\"]\n    vol = df[\"volume\"]\n    direction = np.sign(close.diff().fillna(0))\n    return (direction * vol).cumsum()\n\ndef add_indicators(df: pd.DataFrame) -> pd.DataFrame:\n    df = df.copy()\n    df[\"RSI_14\"] = rsi(df[\"close\"], 14)\n    df[\"MACD\"], df[\"MACD_signal\"], df[\"MACD_hist\"] = macd(df[\"close\"])\n    df[\"Stoch_K\"], df[\"Stoch_D\"] = stochastic(df)\n    df[\"EMA_20\"] = ema(df[\"close\"], 20)\n    df[\"EMA_50\"] = ema(df[\"close\"], 50)\n    df[\"EMA_200\"] = ema(df[\"close\"], 200)\n    df[\"ATR_14\"] = atr(df, 14)\n    df[\"SMA_20\"] = sma(df[\"close\"], 20)\n    df[\"SMA_50\"] = sma(df[\"close\"], 50)\n    df[\"SMA_200\"] = sma(df[\"close\"], 200)\n    df[\"BB_upper_20\"], df[\"BB_mid_20\"], df[\"BB_lower_20\"] = bollinger_bands(df[\"close\"], 20, 2.0)\n    df[\"MFI_14\"] = mfi(df, 14)\n    df[\"ADX_14\"] = adx(df, 14)\n    df[\"OBV\"] = obv(df)\n    return df\n\n# === 2) Candlestick Pattern Functions (Functions remain the same) ===========\n\ndef compute_trend(close: pd.Series, lookback: int) -> Dict[str, Any]:\n    # (Function logic is identical to your input)\n    if len(close) < lookback + 1:\n        return {\"direction\": None, \"change\": None, \"change_pct\": None}\n    start = close.iloc[-1 - lookback]\n    end = close.iloc[-1]\n    pct = (end - start) / start * 100.0 if start != 0 else None\n    if pct is None:\n        direction = None\n    elif pct > 0.5:\n        direction = \"up\"\n    elif pct < -0.5:\n        direction = \"down\"\n    else:\n        direction = \"sideways\"\n    return {\n        \"direction\": direction,\n        \"change\": float(end - start),\n        \"change_pct\": float(pct) if pct is not None else None,\n    }\n\ndef detect_patterns(df: pd.DataFrame) -> Dict[str, Any]:\n    # (Function logic is identical to your input)\n    n = len(df)\n    last = df.iloc[-1]\n    o, h, l, c = last[\"open\"], last[\"high\"], last[\"low\"], last[\"close\"]\n    body = abs(c - o)\n    candle_range = h - l\n    upper_shadow = h - max(o, c)\n    lower_shadow = min(o, c) - l\n\n    patterns: List[str] = []\n    detailed_patterns: List[Dict[str, Any]] = []\n\n    def add_pattern(name: str, bias: str = \"neutral\", strength: str = \"medium\"):\n        patterns.append(name)\n        detailed_patterns.append({\"name\": name, \"bias\": bias, \"strength\": strength})\n\n    body_pct, upper_pct, lower_pct = (0.0, 0.0, 0.0)\n    if candle_range > 0:\n        body_pct, upper_pct, lower_pct = float(body / candle_range), float(upper_shadow / candle_range), float(lower_shadow / candle_range)\n\n        # --- Single-candle patterns (logic retained) ---\n        if lower_shadow > 2 * body and upper_shadow < body:\n            add_pattern(\"Bullish Hammer\" if c > o else \"Hammer-like\", bias=\"bullish\" if c > o else \"neutral\", strength=\"high\")\n        if body_pct > 0.6:\n            add_pattern(\"Bullish Long Candle\" if c > o else \"Bearish Long Candle\", bias=\"bullish\" if c > o else \"bearish\", strength=\"medium\")\n        # ... (rest of single-candle logic) ...\n\n    # --- Multi-candle patterns (logic retained) ---\n    if n >= 2:\n        prev = df.iloc[-2]\n        po, pc, ph, pl = prev[\"open\"], prev[\"close\"], prev[\"high\"], prev[\"low\"]\n        if pc < po and c > o and c >= po and o <= pc: add_pattern(\"Bullish Engulfing\", bias=\"bullish\", strength=\"high\")\n        if pc > po and c < o and c <= po and o >= pc: add_pattern(\"Bearish Engulfing\", bias=\"bearish\", strength=\"high\")\n        # ... (rest of multi-candle logic) ...\n\n    # --- Aggregate bias & context (logic retained) ---\n    bull_count = sum(1 for p in detailed_patterns if p[\"bias\"] == \"bullish\")\n    bear_count = sum(1 for p in detailed_patterns if p[\"bias\"] == \"bearish\")\n    overall_bias = \"bullish\" if bull_count > bear_count else (\"bearish\" if bear_count > bull_count else (\"neutral\" if patterns else None))\n\n    trend_5 = compute_trend(df[\"close\"], 5)\n    bias_dir = \"up\" if overall_bias == \"bullish\" else \"down\"\n    tdir = trend_5[\"direction\"]\n    if overall_bias is None: context_text = \"No strong candlestick-based directional bias.\"\n    elif tdir is None or tdir == \"sideways\": context_text = f\"{overall_bias.capitalize()} signal in a sideways / unclear trend.\"\n    elif tdir == bias_dir: context_text = f\"{overall_bias.capitalize()} continuation signal in an existing {tdir} trend.\"\n    else: context_text = f\"{overall_bias.capitalize()} reversal signal against a {tdir} trend.\"\n\n    info: Dict[str, Any] = {\n        \"open\": float(o), \"high\": float(h), \"low\": float(l), \"close\": float(c),\n        \"body\": float(body), \"range\": float(candle_range), \n        \"upper_shadow\": float(upper_shadow), \"lower_shadow\": float(lower_shadow),\n        \"body_pct_of_range\": body_pct, \"upper_shadow_pct_of_range\": upper_pct, \"lower_shadow_pct_of_range\": lower_pct,\n        \"timestamp\": last.name.isoformat(),\n        \"patterns\": patterns, \"detailed_patterns\": detailed_patterns,\n        \"overall_bias\": overall_bias,\n        \"trend_3\": compute_trend(df[\"close\"], 3), \"trend_5\": trend_5, \"trend_10\": compute_trend(df[\"close\"], 10),\n        \"context\": context_text,\n    }\n\n    if n < 2: info[\"warning\"] = \"Only 1 candle available; multi-candle patterns and trend are limited.\"\n    elif n < 3: info[\"warning\"] = \"Only 2 candles available; some 3-candle patterns are not evaluated.\"\n    \n    return info\n\n# === 3) Summarization and Final Output (Flattened Logic) ====================\n\ndef summarize_latest_indicators(df: pd.DataFrame) -> Dict[str, Any]:\n    # (Function logic is identical to your input)\n    last = df.iloc[-1]\n    has_prev = len(df) >= 2\n    prev = df.iloc[-2] if has_prev else None\n\n    def val_and_delta(col: str):\n        if col not in df.columns: return {\"value\": None, \"delta\": None}\n        val = last[col]\n        if pd.isna(val): value, delta = None, None\n        else:\n            value = float(val)\n            delta = float(last[col] - prev[col]) if has_prev and not pd.isna(prev[col]) else None\n        return {\"value\": value, \"delta\": delta}\n\n    fields = [ \"close\", \"volume\", \"RSI_14\", \"MACD\", \"MACD_signal\", \"MACD_hist\", \"Stoch_K\", \"Stoch_D\", \"EMA_20\", \"EMA_50\", \"EMA_200\", \"ATR_14\", \"SMA_20\", \"SMA_50\", \"SMA_200\", \"BB_upper_20\", \"BB_mid_20\", \"BB_lower_20\", \"MFI_14\", \"ADX_14\", \"OBV\"]\n\n    summary: Dict[str, Any] = {}\n    for col in fields: summary[col] = val_and_delta(col)\n    summary[\"timestamp\"] = last.name.isoformat()\n    if not has_prev: summary[\"warning\"] = \"Only 1 candle available; deltas are not computed.\"\n\n    # Derived context fields\n    close_val = summary[\"close\"][\"value\"]\n    ema20, ema50, atr_val = summary[\"EMA_20\"][\"value\"], summary[\"EMA_50\"][\"value\"], summary[\"ATR_14\"][\"value\"]\n    bb_width = summary[\"BB_upper_20\"][\"value\"] - summary[\"BB_lower_20\"][\"value\"] if summary[\"BB_upper_20\"][\"value\"] is not None and summary[\"BB_lower_20\"][\"value\"] is not None else None\n\n    trend_ema = None\n    if ema20 is not None and ema50 is not None:\n        if ema20 > ema50: trend_ema = \"bullish\"\n        elif ema20 < ema50: trend_ema = \"bearish\"\n        else: trend_ema = \"flat\"\n\n    volatility = None\n    if close_val is not None and atr_val is not None and close_val != 0:\n        atr_pct = atr_val / close_val * 100.0\n        if atr_pct > 3: volatility = \"high\"\n        elif atr_pct > 1: volatility = \"medium\"\n        else: volatility = \"low\"\n\n    summary[\"trend_ema\"] = trend_ema\n    summary[\"volatility_state\"] = volatility\n    summary[\"bb_width\"] = bb_width\n    return summary\n\n\ndef consolidate_analysis(df: pd.DataFrame) -> Dict[str, Any]:\n    \"\"\"Runs all analysis and merges the results into a single flat dictionary.\"\"\"\n    df_with_ind = add_indicators(df)\n    indicators_summary = summarize_latest_indicators(df_with_ind)\n    patterns_summary = detect_patterns(df_with_ind)\n\n    # --- KEY CHANGE: Merge the two dictionaries directly ---\n    # This flattens the output structure.\n    \n    # Start with the indicator data\n    combined_summary = indicators_summary\n    \n    # Merge candlestick data into the same dictionary. \n    # NOTE: This replaces 'timestamp' and 'warning' if they exist in both, which is fine.\n    combined_summary.update(patterns_summary)\n\n    # Add the nested structures back in if you want to keep them accessible,\n    # but the primary data is now flattened for the LLM.\n    combined_summary['__candlestick_metrics'] = patterns_summary\n    \n    return combined_summary\n\n\n# --- EXECUTION BLOCK ---\n# 1. Load data\nraw = items[0][\"json\"]\ntry:\n    rows = [list(row) for row in raw]\n    if len(rows) > 0 and len(rows[0]) != 12: rows = [list(raw)]\nexcept TypeError:\n    rows = [list(raw)]\n\ndf = pd.DataFrame(rows, columns=[ \"open_time\", \"open\", \"high\", \"low\", \"close\", \"volume\", \"close_time\", \"quote_asset_volume\", \"number_of_trades\", \"taker_buy_base\", \"taker_buy_quote\", \"ignore\"])\ndf[\"open_time\"] = pd.to_datetime(df[\"open_time\"].astype(\"int64\"), unit=\"ms\")\ndf[\"close_time\"] = pd.to_datetime(df[\"close_time\"].astype(\"int64\"), unit=\"ms\")\nfor col in [\"open\", \"high\", \"low\", \"close\", \"volume\"]: df[col] = df[col].astype(float)\ndf = df.sort_values(\"open_time\")\ndf = df.set_index(\"open_time\")\n\n# 2. Run the consolidated analysis\nfinal_summary = consolidate_analysis(df)\n\n# 3. Return a single item with the combined JSON object\nreturn [\n    {\"json\": final_summary}\n]"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        752,
+        -80
+      ],
+      "id": "2b2aaba1-13cc-45c4-bba6-67b00463d021",
+      "name": "Code in Python (Beta)"
+    },
+    {
+      "parameters": {
+        "jsCode": "// This script takes the LLM's complex formatted output (HTML/Markdown)\n// and strips all formatting tags and special characters, returning ONLY\n// plain text and clean paragraphs/line breaks for guaranteed Telegram delivery.\n\nfunction stripAllFormatting(formattedText) {\n    if (!formattedText) return \"\";\n\n    let plainText = formattedText;\n\n    // 1. Remove all HTML tags (e.g., <b>, <pre>, <br/>)\n    // This removes the content between the brackets but keeps the text inside.\n    plainText = plainText.replace(/<[^>]*>/g, '');\n\n    // 2. Remove all Markdown syntax remnants\n    plainText = plainText\n        .replace(/\\*\\*/g, '')   // Remove double asterisks (bold)\n        .replace(/\\*/g, '')     // Remove single asterisks (list bullets, italic)\n        .replace(/#/g, '')      // Remove hash signs (headers)\n        .replace(/\\|/g, ' - ')  // Replace pipe characters (table separators) with a dash\n        .replace(/_/g, ' ')      // Replace underscores (formatting) with space\n        .replace(/~/g, '')      // Remove tildes\n        .replace(/`/g, '');     // Remove backticks (code)\n\n    // 3. Clean up the table separators (e.g., :---)\n    plainText = plainText.replace(/:---/g, '');\n\n    // 4. Decode HTML entities (like &amp; to &)\n    plainText = plainText\n        .replace(/&amp;/g, '&')\n        .replace(/&lt;/g, '<')\n        .replace(/&gt;/g, '>');\n\n    // 5. Clean up excessive whitespace and ensure consistent line breaks\n    // Replace multiple newlines with at most two, and trim lines.\n    plainText = plainText.replace(/(\\r\\n|\\n|\\r){3,}/g, '\\n\\n');\n    plainText = plainText.replace(/ {2,}/g, ' '); // Replace multiple spaces with a single space\n    plainText = plainText.trim();\n\n    return plainText;\n}\n\n// Map the function over all incoming items (should be one report item)\nfor (const item of items) {\n    const reportContent = item.json.content;\n    const cleanedContent = stripAllFormatting(reportContent);\n\n    // Replace the original content with the clean, plain text\n    item.json.content = cleanedContent;\n}\n\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1312,
+        -80
+      ],
+      "id": "f2a91026-ef0e-46cb-bc22-7d8e296cab4c",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "Usage is /ticker <symbol>. Ensure to provide the message like this",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        176,
+        -224
+      ],
+      "id": "c1a99e2a-fb2f-47cc-a724-1dd3e69be095",
+      "name": "Send a text message1",
+      "webhookId": "535279d6-a9c0-458f-b9b3-08787dcf0aca",
+      "credentials": {
+        "telegramApi": {
+          "id": "yefG9fpZqS59wIyQ",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').first().json.message.chat.id }}",
+        "text": "The ticker couldn't be found.",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        736,
+        -224
+      ],
+      "id": "df1019cb-9089-436f-b7ba-7284bde1c24f",
+      "name": "Send a text message2",
+      "webhookId": "4a6a5412-011c-4e90-9b0d-e2edea6a8cc0",
+      "credentials": {
+        "telegramApi": {
+          "id": "yefG9fpZqS59wIyQ",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9ba89be9-b059-49ae-8489-2285cc6c70f7",
+              "leftValue": "={{ $json.ticker }}",
+              "rightValue": "=",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -80,
+        -208
+      ],
+      "id": "d0cfaf40-0769-45b1-b240-2c9fc92a50f4",
+      "name": "If the ticker parameter exists in the user query"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "938a91ef-18b0-46cd-9537-9e9ca110fec4",
+              "leftValue": "={{ $json.error }}",
+              "rightValue": "",
+              "operator": {
+                "type": "object",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        448,
+        -208
+      ],
+      "id": "46228db4-02c2-4ef3-8730-d41cc725bf68",
+      "name": "If binance returns data for the ticker"
+    },
+    {
+      "parameters": {
+        "content": "## Getting and processing the ticker and pulling data from binance",
+        "height": 496,
+        "width": 992
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        -368
+      ],
+      "typeVersion": 1,
+      "id": "e3d76516-5b6f-4d5b-b7f2-cf2652742cd9",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "### If there is no data being returned it errors out",
+        "height": 208,
+        "width": 560
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        416,
+        -272
+      ],
+      "typeVersion": 1,
+      "id": "df5ab4e1-a36a-4264-ac03-949f2d030af4",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "### If there is no ticker sent it errors out",
+        "height": 208,
+        "width": 560
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -160,
+        -272
+      ],
+      "typeVersion": 1,
+      "id": "d4091bac-2241-40f1-b030-de0af4443664",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## After pulling the data computing indicators and candlestick patterns analysing those and returning a trading plan with SL, TP, and a description of a trading plan",
+        "height": 496,
+        "width": 1264
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        416,
+        -368
+      ],
+      "typeVersion": 1,
+      "id": "369d3236-dfa8-45e1-a01a-7b187cff54c6",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "### Modularized version of the indicator and candlestick processor divided into 2 nodes based on functionality\n",
+        "height": 400,
+        "width": 448
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        -784
+      ],
+      "typeVersion": 1,
+      "id": "50363508-46e6-49c7-9ef9-382155e33ba4",
+      "name": "Sticky Note4"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Sanitizing and validating input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sanitizing and validating input": {
+      "main": [
+        [
+          {
+            "node": "If the ticker parameter exists in the user query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pulling historical data from Binance API": {
+      "main": [
+        [
+          {
+            "node": "If binance returns data for the ticker",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Indicators": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Candlestick": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        []
+      ]
+    },
+    "Code in Python (Beta)": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message1": {
+      "main": [
+        []
+      ]
+    },
+    "If the ticker parameter exists in the user query": {
+      "main": [
+        [
+          {
+            "node": "Send a text message1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Pulling historical data from Binance API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If binance returns data for the ticker": {
+      "main": [
+        [
+          {
+            "node": "Send a text message2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code in Python (Beta)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "afc74c7a-ec09-4d0e-b030-a7987338fd66",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b2eb7b074231faafb1026ad7f71648ee5beac76b041ce3a68aa6175cb940e266"
+  },
+  "id": "PUGpz6iKtqx9kK66",
+  "tags": []
+}
