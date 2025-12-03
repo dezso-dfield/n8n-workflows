@@ -1,58 +1,11 @@
-<!-- Hero Section -->
-<div style="background:#ffffff; padding: 32px 0; text-align:center; border-radius: 0 0 18px 18px; box-shadow: 0 4px 18px rgba(0,0,0,0.06); margin-bottom:32px;">
+<p align="center">
+  <img src="./image.png" alt="n8n Workflows Header" width="320" />
+</p>
 
-  <img src="./image.png" alt="n8n Workflows Header" style="max-width:260px; width:60%; height:auto; display:block; margin:0 auto 16px auto;" />
+<h1 align="center">🚀 n8n Workflows</h1>
+<p align="center"><em>Automation is powerful — automation plus real software engineering is unstoppable.</em></p>
 
-  <h1 style="font-size:2.6rem; margin:0; font-weight:800; letter-spacing:0.04em;">
-    🚀 n8n Workflows
-  </h1>
-  <p style="font-size:1.05rem; margin-top:12px; color:#555;">
-    Automation is powerful — automation <strong>plus</strong> real software engineering is unstoppable.
-  </p>
-</div>
-<style>
-  body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    line-height: 1.6;
-    color: #222;
-  }
-  h2, h3 {
-    color: #111;
-    margin-top: 2.2em;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 0.25em;
-  }
-  h3 {
-    border-bottom: none;
-    margin-top: 1.6em;
-  }
-  code {
-    background: #111827;
-    color: #e5e7eb;
-    padding: 0.1em 0.4em;
-    border-radius: 4px;
-    font-size: 0.95em;
-  }
-  blockquote {
-    border-left: 4px solid #6366f1;
-    background: #f3f4ff;
-    padding: 0.75em 1em;
-    border-radius: 6px;
-    color: #111827;
-  }
-  ul {
-    margin-top: 0.3em;
-  }
-  .pill {
-    display: inline-block;
-    padding: 0.2em 0.7em;
-    border-radius: 999px;
-    font-size: 0.85em;
-    background: #eef2ff;
-    color: #3730a3;
-    font-weight: 600;
-  }
-</style>
+---
 
 ## ⚡ My Take on n8n — Automation Supercharged by Real Software Engineering
 
@@ -71,7 +24,7 @@ This document explains:
 
 ---
 
-## 🧠 What n8n *Is*  
+## 🧠 What n8n *Is*
 
 n8n is:
 
@@ -120,19 +73,19 @@ Without those foundations, workflows become:
 
 Here’s where n8n shines:
 
-### ✓ **n8n + Databases (Postgres, pgvector, Redis)**  
+### ✓ n8n + Databases (Postgres, pgvector, Redis)
 
-<span class="pill">Long-term memory</span>
+**Long-term memory**
 
-Store long-term, structured data.  
-Build retrieval systems.  
-Track stateful workflows.
+- Store long-term, structured data  
+- Build retrieval systems  
+- Track stateful workflows  
 
 ---
 
-### ✓ **n8n + Python or Node.js**  
+### ✓ n8n + Python or Node.js
 
-<span class="pill">Real logic</span>
+**Real logic**
 
 Complex algorithms?  
 ML models?  
@@ -144,9 +97,9 @@ Drop a **code node** and you’re done.
 
 ---
 
-### ✓ **n8n + AI Models (Ollama, OpenAI, Anthropic)**  
+### ✓ n8n + AI Models (Ollama, OpenAI, Anthropic)
 
-<span class="pill">Reasoning layer</span>
+**Reasoning layer**
 
 AI becomes another tool in your pipeline. Perfect for:
 
@@ -158,7 +111,7 @@ AI becomes another tool in your pipeline. Perfect for:
 
 ---
 
-### ✓ **n8n + APIs**
+### ✓ n8n + APIs
 
 You can automate *anything* that exposes an API:
 
@@ -171,18 +124,17 @@ You can automate *anything* that exposes an API:
 
 ---
 
-### ✓ **n8n + Cron / Triggers**
+### ✓ n8n + Cron / Triggers
 
-Pure automation.  
-No server code needed.  
-Just orchestrate it visually.
+- Pure automation  
+- No server code needed  
+- Just orchestrate it visually  
 
 ---
 
 ## 🔧 n8n Makes the Best Engineers Even Better
 
-n8n does **not** replace developers —  
-it **amplifies** them.
+n8n does **not** replace developers — it **amplifies** them.
 
 With engineering knowledge:
 
@@ -229,25 +181,20 @@ A real-world example of how **n8n + code + AI** outperform n8n alone.
 
 ## 🧩 Best Practices for Professional n8n Workflows
 
-### 1. Use real databases  
+1. **Use real databases**  
+   Never store large data inside workflow variables.
 
-Never store large data inside workflow variables.
+2. **Offload complex logic to Python or JS**  
+   Keep workflows readable.
 
-### 2. Offload complex logic to Python or JS  
+3. **Version-control everything**  
+   Export workflows, write docs, and commit them.
 
-Keep workflows readable.
+4. **Use AI as a reasoning step, not the whole pipeline**  
+   AI should assist engineering logic, not replace it.
 
-### 3. Version-control everything  
-
-Export workflows, write docs, and commit them.
-
-### 4. Use AI as a reasoning step, not the whole pipeline  
-
-AI should assist engineering logic, not replace it.
-
-### 5. Test workflows locally before running in production  
-
-Use staging databases and sandbox APIs.
+5. **Test workflows locally before running in production**  
+   Use staging databases and sandbox APIs.
 
 ---
 
@@ -270,6 +217,6 @@ This repo shows exactly that philosophy in action.
 
 ---
 
-## 📑 License  
+## 📑 License
 
 Each workflow folder contains its own MIT license.
