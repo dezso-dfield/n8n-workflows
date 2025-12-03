@@ -10,8 +10,6 @@
     Automation is powerful — automation <strong>plus</strong> real software engineering is unstoppable.
   </p>
 </div>
-
-<!-- Global page styling (keeps it readable on GitHub / renderers) -->
 <style>
   body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
