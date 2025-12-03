@@ -1,5 +1,60 @@
-# 🚀 n8n Workflows  
-![Header](./image.png)
+<!-- Hero Section -->
+<div style="background:#ffffff; padding: 32px 0; text-align:center; border-radius: 0 0 18px 18px; box-shadow: 0 4px 18px rgba(0,0,0,0.06); margin-bottom:32px;">
+
+  <img src="./image.png" alt="n8n Workflows Header" style="max-width:260px; width:60%; height:auto; display:block; margin:0 auto 16px auto;" />
+
+  <h1 style="font-size:2.6rem; margin:0; font-weight:800; letter-spacing:0.04em;">
+    🚀 n8n Workflows
+  </h1>
+  <p style="font-size:1.05rem; margin-top:12px; color:#555;">
+    Automation is powerful — automation <strong>plus</strong> real software engineering is unstoppable.
+  </p>
+</div>
+
+<!-- Global page styling (keeps it readable on GitHub / renderers) -->
+<style>
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.6;
+    color: #222;
+  }
+  h2, h3 {
+    color: #111;
+    margin-top: 2.2em;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.25em;
+  }
+  h3 {
+    border-bottom: none;
+    margin-top: 1.6em;
+  }
+  code {
+    background: #111827;
+    color: #e5e7eb;
+    padding: 0.1em 0.4em;
+    border-radius: 4px;
+    font-size: 0.95em;
+  }
+  blockquote {
+    border-left: 4px solid #6366f1;
+    background: #f3f4ff;
+    padding: 0.75em 1em;
+    border-radius: 6px;
+    color: #111827;
+  }
+  ul {
+    margin-top: 0.3em;
+  }
+  .pill {
+    display: inline-block;
+    padding: 0.2em 0.7em;
+    border-radius: 999px;
+    font-size: 0.85em;
+    background: #eef2ff;
+    color: #3730a3;
+    font-weight: 600;
+  }
+</style>
 
 ## ⚡ My Take on n8n — Automation Supercharged by Real Software Engineering
 
@@ -9,6 +64,7 @@ But here is the truth:
 > **n8n by itself is simple — but when combined with real software engineering, it becomes insanely powerful.**
 
 This document explains:
+
 - How n8n works  
 - Why it’s not meant to replace engineering  
 - Why engineers who adopt n8n gain a massive advantage  
@@ -18,6 +74,7 @@ This document explains:
 ---
 
 ## 🧠 What n8n *Is*  
+
 n8n is:
 
 - A **workflow orchestrator**
@@ -27,6 +84,7 @@ n8n is:
 - Extensible with **JavaScript**, **Python**, **databases**, and **AI models**
 
 It makes repetitive tasks easy:
+
 - Fetch data  
 - Transform it  
 - Call APIs  
@@ -40,17 +98,19 @@ Think of it as:
 ---
 
 ## 🛑 What n8n *Is Not*
+
 n8n is **not**:
 
 - A replacement for real backends  
 - A full programming language  
 - A complex data pipeline engine like Airflow  
 - A standalone AI reasoning system  
-- A system that guarantees strict scalability on its own
+- A system that guarantees strict scalability on its own  
 
 n8n excels **only when paired with proper engineering foundations**.
 
 Without those foundations, workflows become:
+
 - Hard to maintain  
 - Hard to scale  
 - Hard to debug  
@@ -63,38 +123,58 @@ Without those foundations, workflows become:
 Here’s where n8n shines:
 
 ### ✓ **n8n + Databases (Postgres, pgvector, Redis)**  
+
+<span class="pill">Long-term memory</span>
+
 Store long-term, structured data.  
 Build retrieval systems.  
 Track stateful workflows.
 
+---
+
 ### ✓ **n8n + Python or Node.js**  
+
+<span class="pill">Real logic</span>
+
 Complex algorithms?  
 ML models?  
 Trading logic?  
 Backtesting?  
 Custom transformations?
 
-Drop a code node and you’re done.
+Drop a **code node** and you’re done.
+
+---
 
 ### ✓ **n8n + AI Models (Ollama, OpenAI, Anthropic)**  
-AI becomes another tool in your pipeline.  
-Perfect for:
+
+<span class="pill">Reasoning layer</span>
+
+AI becomes another tool in your pipeline. Perfect for:
+
 - RAG chatbots  
 - Decision engines  
 - Document analysis  
 - Error recovery  
-- Data classification
+- Data classification  
 
-### ✓ **n8n + APIs**  
+---
+
+### ✓ **n8n + APIs**
+
 You can automate *anything* that exposes an API:
+
 - Exchange tickers  
 - Trading platforms  
 - CRM systems  
 - Payments  
 - Telegram, WhatsApp, Slack  
-- File storage
+- File storage  
 
-### ✓ **n8n + Cron / Triggers**  
+---
+
+### ✓ **n8n + Cron / Triggers**
+
 Pure automation.  
 No server code needed.  
 Just orchestrate it visually.
@@ -107,13 +187,14 @@ n8n does **not** replace developers —
 it **amplifies** them.
 
 With engineering knowledge:
+
 - You know how to structure logic  
 - You know how to write efficient JS/Python nodes  
 - You can safely integrate databases  
 - You can design fault-tolerant workflows  
 - You can debug edge cases  
 - You can add AI agents as step-by-step reasoning tools  
-- You can build real products extremely fast
+- You can build real products extremely fast  
 
 > **n8n is a force multiplier. The better your engineering skills, the more powerful n8n becomes.**
 
@@ -122,7 +203,9 @@ With engineering knowledge:
 ## 📦 Example Projects in This Repository
 
 ### 📁 1. `ollama-postgres-rag-chatbot/`
+
 A complete Retrieval-Augmented Generation chatbot powered by:
+
 - Ollama embedding model  
 - Ollama chat model  
 - PostgreSQL pgvector search  
@@ -131,8 +214,12 @@ A complete Retrieval-Augmented Generation chatbot powered by:
 
 This workflow is used to create chat systems that answer questions based on stored documents.
 
+---
+
 ### 📁 2. `basic-crypto-ticker-analysis/`
+
 A multi-stage trading-analysis automation:
+
 - Fetch crypto tickers via API  
 - Python-based technical analysis (ATR, RSI, EMA, etc.)  
 - AI agent for reasoning and decision-making  
@@ -145,18 +232,23 @@ A real-world example of how **n8n + code + AI** outperform n8n alone.
 ## 🧩 Best Practices for Professional n8n Workflows
 
 ### 1. Use real databases  
+
 Never store large data inside workflow variables.
 
 ### 2. Offload complex logic to Python or JS  
+
 Keep workflows readable.
 
 ### 3. Version-control everything  
+
 Export workflows, write docs, and commit them.
 
 ### 4. Use AI as a reasoning step, not the whole pipeline  
+
 AI should assist engineering logic, not replace it.
 
 ### 5. Test workflows locally before running in production  
+
 Use staging databases and sandbox APIs.
 
 ---
@@ -165,6 +257,7 @@ Use staging databases and sandbox APIs.
 
 n8n is NOT meant to be a standalone magic automation tool.  
 But with:
+
 - real programming skills,  
 - real data models,  
 - real databases,  
@@ -180,4 +273,5 @@ This repo shows exactly that philosophy in action.
 ---
 
 ## 📑 License  
+
 Each workflow folder contains its own MIT license.
